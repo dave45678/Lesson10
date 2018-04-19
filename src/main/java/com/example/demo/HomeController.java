@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 @Controller
 public class HomeController {
@@ -20,7 +21,23 @@ public class HomeController {
 
     @RequestMapping("/")
     public String listCourses(Model model){
-        model.addAttribute("courses", courseRepository.findAll());
+        ArrayList<Course> courses = new ArrayList<>();
+        Course c = new Course();
+        c.setId(123);
+        c.setCredit(3);
+        c.setTitle("Course Title");
+        c.setDescription("this is my course");
+        c.setInstructor("Bart Simpson");
+        courses.add(c);
+        Course d = new Course();
+        d.setId(199);
+        d.setCredit(2);
+        d.setInstructor("Homer Simpson");
+        d.setDescription("This is course d");
+        courses.add(d);
+
+        //model.addAttribute("courses", courseRepository.findAll());
+        model.addAttribute("courses",courses);
         return "list";
     }
 
